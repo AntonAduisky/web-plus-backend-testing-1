@@ -13,10 +13,14 @@ describe('PostsService', () => {
   });
 
   it('should add a new post', () => {
-    // реализуйте тест-кейс
+    postsService.create(post);
+    expect(postsService).toHaveProperty('posts', [
+      { date: expect.any(String), id: expect.any(String), text: 'Some pre-existing post' },
+      { date: expect.any(String), id: expect.any(String), text: 'Mocked post' },
+    ]);
   });
 
   it('should find a post', () => {
-    // реализуйте тест-кейс
+    postsService.find('Some pre-existing post');
   });
 });
