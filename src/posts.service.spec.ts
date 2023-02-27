@@ -3,6 +3,7 @@ import { Post, PostsService } from './posts.service';
 describe('PostsService', () => {
   let postsService: PostsService;
   let newPost: Post;
+  let findedPost: Post | undefined;
   const post: Omit<Post, 'id' | 'date'> = {
     text: 'Mocked post',
   };
@@ -11,6 +12,7 @@ describe('PostsService', () => {
     postsService = new PostsService();
 
     newPost = postsService.create(post);
+    findedPost = postsService.find(newPost.id);
   });
 
   it('should add a new post', () => {
@@ -18,6 +20,6 @@ describe('PostsService', () => {
   });
 
   it('should find a post', () => {
-    expect(postsService.find(newPost.id)).toMatchObject(post);
+    expect(findedPost).toMatchObject(newPost);
   });
 });
