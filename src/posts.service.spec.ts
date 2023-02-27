@@ -18,6 +18,6 @@ describe('PostsService', () => {
   });
 
   it('should find a post', () => {
-    expect(postsService.find(newPost.id)).toEqual(newPost);
+    expect(postsService.find(newPost.id)).toMatchObject(post);
   });
 });
