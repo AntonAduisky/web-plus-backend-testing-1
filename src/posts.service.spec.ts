@@ -2,6 +2,7 @@ import { Post, PostsService } from './posts.service';
 
 describe('PostsService', () => {
   let postsService: PostsService;
+  let newPost: Post;
   const post: Omit<Post, 'id' | 'date'> = {
     text: 'Mocked post',
   };
@@ -9,18 +10,14 @@ describe('PostsService', () => {
   beforeEach(async () => {
     postsService = new PostsService();
 
-    postsService.create({ text: 'Some pre-existing post' });
+    newPost = postsService.create(post);
   });
 
   it('should add a new post', () => {
-    postsService.create(post);
-    expect(postsService).toHaveProperty('posts', [
-      { date: expect.any(String), id: expect.any(String), text: 'Some pre-existing post' },
-      { date: expect.any(String), id: expect.any(String), text: 'Mocked post' },
-    ]);
+    expect(newPost.text).toEqual(post.text);
   });
 
   it('should find a post', () => {
-    postsService.find('Some pre-existing post');
+    expect(postsService.find(newPost.id)).toEqual(newPost);
   });
 });
