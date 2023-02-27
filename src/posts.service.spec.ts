@@ -20,6 +20,12 @@ describe('PostsService', () => {
   });
 
   it('should find a post', () => {
+    const secondPost = postsService.create({
+      text: 'Second post',
+    });
+    expect(postsService.find('1')).toMatchObject(newPost);
+    expect(postsService.find('2')).toMatchObject(secondPost);
+
     expect(findedPost).toMatchObject(newPost);
   });
 });
